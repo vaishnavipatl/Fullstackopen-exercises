@@ -16,7 +16,7 @@ function App() {
   useEffect(()=>{
     console.log("effect");
     axios
-       .get('http://localhost:3001/persons')
+       .get('http://localhost:3001/api/persons')
        .then(response=>{
         setPersons(response.data)
         console.log(response.data);
@@ -49,10 +49,10 @@ function App() {
      showmessage("Both name and number are required." ,'error');
      return;
    }
-   if(persons.some((person)=>(person.name === newName && person.number === newNumber))){
-     showmessage(`${newName} is already added to Phonebook `)
-     return
-    }
+  //  if(persons.some((person)=>(person.name === newName && person.number === newNumber))){
+  //    showmessage(`${newName} is already added to Phonebook `)
+  //    return
+  //   }
  
     const newPerson ={
       name:newName ,
@@ -60,7 +60,7 @@ function App() {
     }
 
     axios
-    .post('http://localhost:3001/persons' , newPerson)
+    .post('http://localhost:3001/api/persons/add/' , newPerson)
     .then(response=>{
      setPersons([...persons , response.data])
     //  console.log(response.data);
@@ -73,7 +73,7 @@ function App() {
  const deleteContact=(id)=>{
   if(window.confirm("Do you want delete this contact")){
     axios
-    .delete(`http://localhost:3001/persons/${id}`)
+    .delete(`http://localhost:3001/api/persons/${id}`)
     .then( ( )=>{
       setPersons(persons.filter((person)=>person.id !== id))
       showmessage(`${newName} delete successfully!`);
