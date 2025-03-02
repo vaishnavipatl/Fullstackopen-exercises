@@ -60,7 +60,7 @@ function App() {
     }
 
     axios
-    .post('http://localhost:3001/api/persons/add/' , newPerson)
+    .post('/api/persons/add/' , newPerson)
     .then(response=>{
      setPersons([...persons , response.data])
     //  console.log(response.data);
